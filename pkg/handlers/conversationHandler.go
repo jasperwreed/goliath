@@ -1,8 +1,12 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
+
+	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jasperwreed/goliath/pkg/models"
 	"github.com/jasperwreed/goliath/pkg/services"
 )
 
@@ -14,22 +18,22 @@ func NewConversationHandler(s *services.ConversationService) *ConversationHandle
 	return &ConversationHandler{service: s}
 }
 
-func (h *ConversationHandler) GetConversationByID(w http.ResponseWriter, r *http.Request) {
-	strID := /* extract from request */
+func (h *ConversationHandler) GetConversationByID(c *gin.Context) {
+	strID := c.Param("id")
 
 	id, err := strconv.Atoi(strID)
 	if err != nil {
-		http.Error(w, "Invalid ID format", http.StatusBadRequest)
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ID format"})
 		return
 	}
 
 	conversation, err := h.service.GetConversationByID(uint(id))
 	if err != nil {
-		http.Error(w, "Conversation not found", http.StatusNotFound)
+		c.JSON(http.StatusNotFound, gin.H{"error": "Conversation not found"})
 		return
 	}
 
-	json.NewEncoder(w).Encode(conversation)
+	c.JSON(http.StatusOK, conversation)
 }
 
 func (h *ConversationHandler) CreateConversation(w http.ResponseWriter, r *http.Request) {

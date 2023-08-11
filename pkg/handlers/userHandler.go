@@ -14,7 +14,7 @@ type UserHandler struct {
 	service *services.UserService
 }
 
-func NewUserHandler(service services.UserService) *UserHandler {
+func NewUserHandler(s *services.UserService) *UserHandler {
 	return &UserHandler{service: s}
 }
 
@@ -37,8 +37,8 @@ func (h *UserHandler) CreateUser(c *gin.Context) {
 
 // GetUserByID fetches a user by their ID.
 func (h *UserHandler) GetUserByID(c *gin.Context) {
-	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	strID := c.Param("id")
+	id, err := strconv.Atoi(strID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID format"})
 		return
@@ -61,8 +61,8 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 		return
 	}
 
-	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	strID := c.Param("id")
+	id, err := strconv.Atoi(strID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID format"})
 		return
@@ -80,8 +80,8 @@ func (h *UserHandler) UpdateUser(c *gin.Context) {
 
 // DeleteUser deletes a user by their ID.
 func (h *UserHandler) DeleteUser(c *gin.Context) {
-	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
+	strID := c.Param("id")
+	id, err := strconv.Atoi(strID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user ID format"})
 		return
