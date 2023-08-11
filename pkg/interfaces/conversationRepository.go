@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"github.com/jasperwreed/goliath/models"
+	"github.com/jasperwreed/goliath/pkg/models"
 )
 
 type ConversationRepository interface {

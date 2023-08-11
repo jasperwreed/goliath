@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"github.com/jasperwreed/goliath/services"
+	"github.com/jasperwreed/goliath/pkg/services"
 )
 
 type UserHandler struct {

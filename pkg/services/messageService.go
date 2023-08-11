@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/jasperwreed/goliath/interfaces"
-	"github.com/jasperwreed/goliath/models"
+	"github.com/jasperwreed/goliath/pkg/interfaces"
+	"github.com/jasperwreed/goliath/pkg/models"
 )
 
 type MessageService struct {
