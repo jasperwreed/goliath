@@ -7,6 +7,6 @@ import (
 type MessageRepository interface {
 	FindByID(id string) (*models.Message, error)
 	FindByConversationID(conversationID string) ([]models.Message, error)
-	Save(message *models.Message) error
+	Create(message *models.Message) error
 	Delete(message *models.Message) error
 }

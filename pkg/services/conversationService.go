@@ -16,3 +16,19 @@ func NewConversationService(r interfaces.ConversationRepository) *ConversationSe
 func (s *ConversationService) GetConversationByID(id uint) (*models.Conversation, error) {
 	return s.repo.FindByID(id)
 }
+
+func (s *ConversationService) CreateConversation(conversation *models.Conversation) error {
+	return s.repo.Create(conversation)
+}
+
+func (s *ConversationService) UpdateConversation(conversation *models.Conversation) error {
+	return s.repo.Update(conversation)
+}
+
+func (s *ConversationService) DeleteConversation(id uint) error {
+	conversation, err := s.GetConversationByID(id)
+	if err != nil {
+		return err
+	}
+	return s.repo.Delete(conversation)
+}
